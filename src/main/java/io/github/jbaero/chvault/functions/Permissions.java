@@ -3,6 +3,7 @@ package io.github.jbaero.chvault.functions;
 import com.laytonsmith.PureUtilities.Version;
 import com.laytonsmith.abstraction.MCCommandSender;
 import com.laytonsmith.abstraction.MCOfflinePlayer;
+import com.laytonsmith.abstraction.MCPlayer;
 import com.laytonsmith.annotations.api;
 import com.laytonsmith.core.CHVersion;
 import com.laytonsmith.core.Static;
@@ -124,23 +125,18 @@ public class Permissions {
     @api
     public static class vault_pgroup_add extends jFunction {
         @Override
-        public Class<? extends CREThrowable>[] thrown() {
-            return new Class[0];
-        }
-
-        @Override
         public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-            Permission perms = getPerms(t);
-            MCCommandSender sender;
+            String playerStr;
             String group;
             if (args.length > 1) {
-                sender = Static.GetPlayer(args[0], t);
+                playerStr = args[0].val();
                 group = args[1].val();
             } else {
-                sender = environment.getEnv(CommandHelperEnvironment.class).GetCommandSender();
+                playerStr = environment.getEnv(CommandHelperEnvironment.class).GetCommandSender().getName();
                 group = args[0].val();
             }
-            Player player = (Player) sender.getHandle();
+            Player player = (Player)Static.GetPlayer(playerStr, t).getHandle();
+            Permission perms = getPerms(t);
             perms.playerAddGroup(player, group);
             return CVoid.VOID;
         }
@@ -160,17 +156,17 @@ public class Permissions {
     public static class vault_pgroup_remove extends jFunction {
         @Override
         public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-            Permission perms = getPerms(t);
-            MCCommandSender sender;
+            String playerStr;
             String group;
             if (args.length > 1) {
-                sender = Static.GetPlayer(args[0], t);
+                playerStr = args[0].val();
                 group = args[1].val();
             } else {
-                sender = environment.getEnv(CommandHelperEnvironment.class).GetCommandSender();
+                playerStr = environment.getEnv(CommandHelperEnvironment.class).GetCommandSender().getName();
                 group = args[0].val();
             }
-            Player player = (Player) sender.getHandle();
+            Player player = (Player)Static.GetPlayer(playerStr, t).getHandle();
+            Permission perms = getPerms(t);
             perms.playerRemoveGroup(player, group);
             return CVoid.VOID;
         }
@@ -190,17 +186,17 @@ public class Permissions {
     public static class vault_pgroup_set extends jFunction {
         @Override
         public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-            Permission perms = getPerms(t);
-            MCCommandSender sender;
+            String playerStr;
             String group;
             if (args.length > 1) {
-                sender = Static.GetPlayer(args[0], t);
+                playerStr = args[0].val();
                 group = args[1].val();
             } else {
-                sender = environment.getEnv(CommandHelperEnvironment.class).GetCommandSender();
+                playerStr = environment.getEnv(CommandHelperEnvironment.class).GetCommandSender().getName();
                 group = args[0].val();
             }
-            Player player = (Player) sender.getHandle();
+            Player player = (Player)Static.GetPlayer(playerStr, t).getHandle();
+            Permission perms = getPerms(t);
             for (String element : perms.getPlayerGroups(player)) {
                 perms.playerRemoveGroup(player, element);
             }
