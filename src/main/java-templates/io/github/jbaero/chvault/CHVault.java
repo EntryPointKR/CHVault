@@ -14,46 +14,46 @@ import com.laytonsmith.core.functions.AbstractFunction;
 @MSExtension("${project.name}")
 public class CHVault extends AbstractExtension {
 
-	@Override
-	public Version getVersion() {
-		return new SimpleVersion("${project.version}");
-	}
+    @Override
+    public Version getVersion() {
+        return new SimpleVersion("${project.version}");
+    }
 
-	@Override
-	public void onStartup() {
-		System.out.println("${project.name} " + getVersion() + " loaded.");
-	}
+    @Override
+    public void onStartup() {
+        System.out.println("${project.name} " + getVersion() + " loaded.");
+    }
 
-	@Override
-	public void onShutdown() {
-		System.out.println("${project.name} " + getVersion() + " unloaded.");
-	}
+    @Override
+    public void onShutdown() {
+        System.out.println("${project.name} " + getVersion() + " unloaded.");
+    }
 
-	public static abstract class jFunction extends AbstractFunction {
+    public static abstract class jFunction extends AbstractFunction {
 
-		@Override
-		public String getName() {
-			return this.getClass().getSimpleName();
-		}
+        @Override
+        public String getName() {
+            return this.getClass().getSimpleName();
+        }
 
-		@Override
-		public Version since() {
-			return CHVersion.V3_2_0;
-		}
+        @Override
+        public Version since() {
+            return CHVersion.V3_2_0;
+        }
 
-		@Override
-		public Boolean runAsync() {
-			return false;
-		}
+        @Override
+        public Boolean runAsync() {
+            return false;
+        }
 
-		@Override
-		public boolean isRestricted() {
-			return true;
-		}
+        @Override
+        public boolean isRestricted() {
+            return true;
+        }
 
-		@Override
-		public Class<? extends CREThrowable>[] thrown() {
-			return new Class[]{CREPluginInternalException.class, CREInvalidPluginException.class, CRECastException.class};
-		}
-	}
+        @Override
+        public Class<? extends CREThrowable>[] thrown() {
+            return new Class[]{CREPluginInternalException.class, CREInvalidPluginException.class, CRECastException.class};
+        }
+    }
 }

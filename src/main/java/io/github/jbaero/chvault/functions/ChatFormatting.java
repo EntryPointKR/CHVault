@@ -20,98 +20,98 @@ import org.bukkit.OfflinePlayer;
  */
 public class ChatFormatting {
 
-	static Chat getChat(Target t) throws CREPluginInternalException {
+    static Chat getChat(Target t) throws CREPluginInternalException {
 
-		try {
-			return Bukkit.getServer().getServicesManager().getRegistration(Chat.class).getProvider();
-		} catch (NullPointerException npe) {
-			throw new CREPluginInternalException("Could not connect to chat features of Vault.", t);
-		}
-	}
+        try {
+            return Bukkit.getServer().getServicesManager().getRegistration(Chat.class).getProvider();
+        } catch (NullPointerException npe) {
+            throw new CREPluginInternalException("Could not connect to chat features of Vault.", t);
+        }
+    }
 
-	@api
-	public static class vault_group_prefix extends jFunction {
+    @api
+    public static class vault_group_prefix extends jFunction {
 
-		public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-			Static.checkPlugin("Vault", t);
-			return new CString(getChat(t).getGroupPrefix(args[0].val(), args[1].val()), t);
-		}
+        public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
+            Static.checkPlugin("Vault", t);
+            return new CString(getChat(t).getGroupPrefix(args[0].val(), args[1].val()), t);
+        }
 
-		public String getName() {
-			return "vault_group_prefix";
-		}
+        public String getName() {
+            return "vault_group_prefix";
+        }
 
-		public Integer[] numArgs() {
-			return new Integer[]{2};
-		}
+        public Integer[] numArgs() {
+            return new Integer[]{2};
+        }
 
-		public String docs() {
-			return "string {world, group} Returns the prefix of group in world.";
-		}
-	}
+        public String docs() {
+            return "string {world, group} Returns the prefix of group in world.";
+        }
+    }
 
-	@api
-	public static class vault_group_suffix extends jFunction {
+    @api
+    public static class vault_group_suffix extends jFunction {
 
-		public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-			Static.checkPlugin("Vault", t);
-			return new CString(getChat(t).getGroupSuffix(args[0].val(), args[1].val()), t);
-		}
+        public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
+            Static.checkPlugin("Vault", t);
+            return new CString(getChat(t).getGroupSuffix(args[0].val(), args[1].val()), t);
+        }
 
-		public String getName() {
-			return "vault_group_suffix";
-		}
+        public String getName() {
+            return "vault_group_suffix";
+        }
 
-		public Integer[] numArgs() {
-			return new Integer[]{2};
-		}
+        public Integer[] numArgs() {
+            return new Integer[]{2};
+        }
 
-		public String docs() {
-			return "string {world, group} Returns the suffix of group in world.";
-		}
-	}
+        public String docs() {
+            return "string {world, group} Returns the suffix of group in world.";
+        }
+    }
 
-	@api
-	public static class vault_user_prefix extends jFunction {
+    @api
+    public static class vault_user_prefix extends jFunction {
 
-		public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-			Static.checkPlugin("Vault", t);
-			return new CString(getChat(t).getPlayerPrefix(args[0].val(),
-					(OfflinePlayer) Static.GetUser(args[1], t).getHandle()), t);
-		}
+        public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
+            Static.checkPlugin("Vault", t);
+            return new CString(getChat(t).getPlayerPrefix(args[0].val(),
+                    (OfflinePlayer) Static.GetUser(args[1], t).getHandle()), t);
+        }
 
-		public String getName() {
-			return "vault_user_prefix";
-		}
+        public String getName() {
+            return "vault_user_prefix";
+        }
 
-		public Integer[] numArgs() {
-			return new Integer[]{2};
-		}
+        public Integer[] numArgs() {
+            return new Integer[]{2};
+        }
 
-		public String docs() {
-			return "string {world, user} Returns the prefix of user in world. Accuracy is plugin dependent.";
-		}
-	}
+        public String docs() {
+            return "string {world, user} Returns the prefix of user in world. Accuracy is plugin dependent.";
+        }
+    }
 
-	@api
-	public static class vault_user_suffix extends jFunction {
+    @api
+    public static class vault_user_suffix extends jFunction {
 
-		public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
-			Static.checkPlugin("Vault", t);
-			return new CString(getChat(t).getPlayerSuffix(args[0].val(),
-					(OfflinePlayer) Static.GetUser(args[1], t).getHandle()), t);
-		}
+        public Construct exec(Target t, Environment environment, Construct... args) throws ConfigRuntimeException {
+            Static.checkPlugin("Vault", t);
+            return new CString(getChat(t).getPlayerSuffix(args[0].val(),
+                    (OfflinePlayer) Static.GetUser(args[1], t).getHandle()), t);
+        }
 
-		public String getName() {
-			return "vault_user_suffix";
-		}
+        public String getName() {
+            return "vault_user_suffix";
+        }
 
-		public Integer[] numArgs() {
-			return new Integer[]{2};
-		}
+        public Integer[] numArgs() {
+            return new Integer[]{2};
+        }
 
-		public String docs() {
-			return "string {world, user} Returns the suffix of user in world. Accuracy is plugin dependent.";
-		}
-	}
+        public String docs() {
+            return "string {world, user} Returns the suffix of user in world. Accuracy is plugin dependent.";
+        }
+    }
 }
